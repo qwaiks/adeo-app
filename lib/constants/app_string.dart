@@ -18,4 +18,13 @@ class AppString {
     {'name': 'Senior High', 'value': 3},
     {'name': 'Tertiary', 'value': 4},
   ];
+
+  static List classOptions = [
+    {'name': 'english', 'value': 1},
+    {'name': 'ict', 'value': 2},
+    {'name': 'social', 'value': 3},
+    {'name': 'french', 'value': 4},
+    {'name': 'math', 'value': 5},
+    {'name': 'science', 'value': 6},
+  ];
 }
