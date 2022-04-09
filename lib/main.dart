@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: AppString.appName,
         theme: ThemeData(
+          fontFamily: AppString.primaryFont,
           primarySwatch: Colors.green,
         ),
         onGenerateRoute: generateRoute,

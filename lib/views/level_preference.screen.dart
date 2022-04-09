@@ -68,11 +68,12 @@ class _LevelPreferenceScreenState extends State<LevelPreferenceScreen> {
         SvgPicture.asset(
           AppImages.levelAbs,
           colorBlendMode: BlendMode.darken,
-          fit: BoxFit.cover,
+          fit: BoxFit.fitWidth,
         ),
-        Positioned.fill(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 30),
+        Align(
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: double.infinity,
             child: Column(
               children: [selectText, verticalSpacer(), options],
             ),

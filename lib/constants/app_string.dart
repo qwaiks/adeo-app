@@ -1,5 +1,6 @@
 class AppString {
   static const String appName = "Adeo test";
+  static const String primaryFont = "Poppins";
   static const String appWelcome = "Welcome to the\nAdeo Experience";
   static const String subscriptionPrompt =
       "You currently have \n NO Subscriptions. \n\n First take a DIAGNOSTIC TEST \n to determine the right course \n for you. ";
