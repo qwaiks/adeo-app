@@ -6,8 +6,15 @@ class AppString {
   static const String next = 'Next';
   static const String skip = 'Skip';
   static const String selectLevel = "Select your level";
-  static const String selectClass ="Select your class";
+  static const String selectClass = "Select your class";
   static const String score = 'Score';
   static const String rank = 'Rank';
   static const String timeTaken = 'Time taken';
+
+  static List levelOptions = [
+    {'name': 'Primary', 'value': 1},
+    {'name': 'Junior High', 'value': 2},
+    {'name': 'Senior High', 'value': 3},
+    {'name': 'Tertiary', 'value': 4},
+  ];
 }

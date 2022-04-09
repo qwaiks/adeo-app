@@ -1,7 +1,10 @@
 import 'package:adeo_app/config/locator.dart';
+import 'package:adeo_app/config/provider.dart';
 import 'package:adeo_app/config/router.dart';
 import 'package:adeo_app/constants/app_string.dart';
+import 'package:adeo_app/services/router.service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'constants/app_routes.dart';
 
@@ -16,14 +19,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: AppString.appName,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
+    return MultiProvider(
+      providers: providers,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: AppString.appName,
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        onGenerateRoute: generateRoute,
+        initialRoute: AppRoutes.welcomeRoute,
+        navigatorKey: locator<RouterService>().navigatorKey,
       ),
-      onGenerateRoute: generateRoute,
-      initialRoute: AppRoutes.welcomeRoute,
     );
   }
 }

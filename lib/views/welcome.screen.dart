@@ -23,10 +23,11 @@ class WelcomeScreen extends StatelessWidget {
           SvgPicture.asset(AppImages.cornerAbs),
           Positioned.fill(
             child: Align(
+              alignment: Alignment.centerRight,
               child: TextButton(
                 child: const Text(
                   AppString.skip,
-                  style: TextStyle(color: Colors.green, fontSize: 18),
+                  style: TextStyle(color: AppColors.background01, fontSize: 18),
                 ),
                 onPressed: () {},
               ),
@@ -41,7 +42,6 @@ class WelcomeScreen extends StatelessWidget {
       style: TextStyle(
           fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
     );
-
 
     final subscriptionText = Text.rich(
       TextSpan(text: 'You currently have\n', children: [
