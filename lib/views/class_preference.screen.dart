@@ -103,8 +103,12 @@ class _ClassPreferenceScreenState extends State<ClassPreferenceScreen> {
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
-          SvgPicture.asset(AppImages.questionsAbs,
-              width: MediaQuery.of(context).size.width, fit: BoxFit.fitWidth),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            child: SvgPicture.asset(
+              AppImages.questionsAbs,
+            ),
+          ),
           Positioned.fill(
             child: Center(
                 child: ListView.builder(
@@ -129,7 +133,7 @@ class _ClassPreferenceScreenState extends State<ClassPreferenceScreen> {
                             Visibility(
                               child: Container(
                                 height: 5,
-                                width: 50,
+                                width: 30,
                                 color: Colors.white,
                               ),
                               visible: selected,
@@ -217,7 +221,8 @@ class _FloatClassWidgetState extends State<FloatClassWidget> {
                 child: Text(
                   widget.text,
                   style: TextStyle(
-                      fontSize: widget.isSelected ? 32 : 20, color: Colors.white),
+                      fontSize: widget.isSelected ? 32 : 20,
+                      color: Colors.white),
                 )),
           ],
         ),
