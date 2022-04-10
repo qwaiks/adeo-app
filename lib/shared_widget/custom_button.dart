@@ -4,19 +4,21 @@ class CustomButton extends StatelessWidget {
   final bool isOutline;
   final String text;
   final Color textColor;
+  final Color backgroundColor;
   final Function onPressed;
 
   const CustomButton(
       {Key key,
       this.isOutline = false,
       this.text,
+      this.backgroundColor = Colors.green,
       this.onPressed,
       this.textColor = Colors.white})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
+    final outline = OutlinedButton(
       onPressed: onPressed,
       style: ButtonStyle(
         side: MaterialStateProperty.all(
@@ -33,5 +35,19 @@ class CustomButton extends StatelessWidget {
         ),
       ),
     );
+
+    final long = ElevatedButton(
+      onPressed: onPressed,
+      //color: backgroundColor,
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          minimumSize: MaterialStateProperty.all(Size(double.infinity, 51))),
+      child: Text(
+        text,
+        style: TextStyle(
+            fontSize: 21, fontWeight: FontWeight.w600, color: textColor),
+      ),
+    );
+    return isOutline ? outline : long;
   }
 }

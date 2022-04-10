@@ -15,6 +15,7 @@ class OptionSelect extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           text,
+          textAlign: TextAlign.center,
           style: TextStyle(fontSize: isSelected ? 38 : 16, color: Colors.white),
         ));
   }
