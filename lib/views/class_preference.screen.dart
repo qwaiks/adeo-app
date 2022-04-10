@@ -47,15 +47,16 @@ class _ClassPreferenceScreenState extends State<ClassPreferenceScreen> {
             child: Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                child: const Text(
-                  AppString.skip,
-                  style: TextStyle(color: AppColors.background02, fontSize: 18),
-                ),
-                onPressed: () => router.navigateTo(AppRoutes.questionRoute, args: {
-                  'selectedLevel': widget.selectedLevel,
-                  'selectedClass': 1
-                })
-              ),
+                  child: const Text(
+                    AppString.skip,
+                    style:
+                        TextStyle(color: AppColors.background02, fontSize: 18),
+                  ),
+                  onPressed: () => router.navigateTo(AppRoutes.questionRoute,
+                          args: {
+                            'selectedLevel': widget.selectedLevel,
+                            'selectedClass': 1
+                          })),
             ),
           )
         ],
@@ -69,16 +70,21 @@ class _ClassPreferenceScreenState extends State<ClassPreferenceScreen> {
 
     final subjects = Container(
       height: MediaQuery.of(context).size.height * 0.4,
-      color: Colors.blue,
+      width: double.infinity,
       child: Stack(
         children: vm.classOptions.map((e) {
+          var width = MediaQuery.of(context).size.width * 0.8;
+          var height = MediaQuery.of(context).size.height * 0.35;
           var name = e['name'];
           var value = e['value'];
           var selected = vm.selectedClass == value;
           return FloatClassWidget(
             text: name,
+            onPressed: () => vm.onChangeClass(value),
             value: value,
             isSelected: selected,
+            fullWidth: width.toInt(),
+            fullHeight: height.toInt(),
           );
         }).toList(),
       ),
@@ -94,42 +100,44 @@ class _ClassPreferenceScreenState extends State<ClassPreferenceScreen> {
     );
 
     final classNumbers = SizedBox(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
-          SvgPicture.asset(AppImages.questionsAbs, fit: BoxFit.fitWidth),
+          SvgPicture.asset(AppImages.questionsAbs,
+              width: MediaQuery.of(context).size.width, fit: BoxFit.fitWidth),
           Positioned.fill(
-            child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: AppString.classOptions.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  var name = vm.classOptions[index]['name'];
-                  int value = vm.classOptions[index]['value'];
-                  var selected = vm.selectedClass == value;
-                  return TextButton(
-                    onPressed: () => vm.onChangeClass(value),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          value.toString(),
-                          style: TextStyle(
-                              fontSize: selected ? 40 : 29,
-                              color: Colors.white),
+            child: Center(
+                child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: AppString.classOptions.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      var name = vm.classOptions[index]['name'];
+                      int value = vm.classOptions[index]['value'];
+                      var selected = vm.selectedClass == value;
+                      return TextButton(
+                        onPressed: () => vm.onChangeClass(value),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              value.toString(),
+                              style: TextStyle(
+                                  fontSize: selected ? 40 : 29,
+                                  color: Colors.white),
+                            ),
+                            Visibility(
+                              child: Container(
+                                height: 5,
+                                width: 50,
+                                color: Colors.white,
+                              ),
+                              visible: selected,
+                            )
+                          ],
                         ),
-                        Visibility(
-                          child: Container(
-                            height: 5,
-                            width: 50,
-                            color: Colors.white,
-                          ),
-                          visible: selected,
-                        )
-                      ],
-                    ),
-                  );
-                }),
+                      );
+                    })),
           ),
         ],
       ),
@@ -146,7 +154,6 @@ class _ClassPreferenceScreenState extends State<ClassPreferenceScreen> {
               selectClassPrompt,
               verticalSpacer(),
               classNumbers,
-              verticalSpacer(),
               subjects,
               verticalSpacer(),
               button
@@ -162,8 +169,17 @@ class FloatClassWidget extends StatefulWidget {
   final String text;
   final int value;
   final bool isSelected;
+  final int fullWidth, fullHeight;
+  final Function onPressed;
 
-  const FloatClassWidget({Key key, this.text, this.isSelected, this.value})
+  const FloatClassWidget(
+      {Key key,
+      this.text,
+      this.isSelected,
+      this.value,
+      this.onPressed,
+      this.fullWidth,
+      this.fullHeight})
       : super(key: key);
 
   @override
@@ -171,33 +187,40 @@ class FloatClassWidget extends StatefulWidget {
 }
 
 class _FloatClassWidgetState extends State<FloatClassWidget> {
+  double xPosition, yPosition;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    xPosition = Random().nextInt(widget.fullWidth).toDouble();
+    yPosition = Random().nextInt(widget.fullHeight).toDouble();
+  }
+
   @override
   Widget build(BuildContext context) {
-    double leftPosition = Random()
-        .nextInt((MediaQuery.of(context).size.width * 0.8).toInt())
-        .toDouble();
-    double rightPosition = Random()
-        .nextInt((MediaQuery.of(context).size.height * 0.2).toInt())
-        .toDouble();
-
     return GestureDetector(
       onVerticalDragUpdate: (dd) {
         setState(() {
-          leftPosition = dd.localPosition.dy;
-          rightPosition = dd.localPosition.dx;
+          yPosition = dd.localPosition.dy;
+          xPosition = dd.localPosition.dx;
         });
       },
-      child: Stack(
-        children: [
-          Positioned(
-              left: leftPosition,
-              right: rightPosition,
-              child: Text(
-                widget.text,
-                style: TextStyle(
-                    fontSize: widget.isSelected ? 32 : 20, color: Colors.white),
-              )),
-        ],
+      onTap: widget.onPressed,
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Stack(
+          children: [
+            Positioned(
+                top: yPosition,
+                left: xPosition,
+                child: Text(
+                  widget.text,
+                  style: TextStyle(
+                      fontSize: widget.isSelected ? 32 : 20, color: Colors.white),
+                )),
+          ],
+        ),
       ),
     );
   }
