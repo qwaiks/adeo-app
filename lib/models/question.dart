@@ -1,4 +1,5 @@
 import 'package:adeo_app/models/answer.dart';
+import 'package:adeo_app/models/topic.dart';
 
 class Question {
   int id;
@@ -19,7 +20,7 @@ class Question {
   int deleted;
   String editors;
   int editorId;
-  //String topic;
+  Topic topic;
   List<Answers> answers;
 
   Question(
@@ -41,7 +42,7 @@ class Question {
         this.deleted,
         this.editors,
         this.editorId,
-       // this.topic,
+        this.topic,
         this.answers});
 
   Question.fromJson(Map<String, dynamic> json) {

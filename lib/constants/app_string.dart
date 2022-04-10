@@ -11,6 +11,7 @@ class AppString {
   static const String score = 'Score';
   static const String rank = 'Rank';
   static const String timeTaken = 'Time taken';
+  static var buySubscription ='Buy Subscription';
 
   static List levelOptions = [
     {'name': 'Primary', 'value': 1},
@@ -27,4 +28,5 @@ class AppString {
     {'name': 'math', 'value': 5},
     {'name': 'science', 'value': 6},
   ];
+
 }
