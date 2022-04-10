@@ -32,6 +32,7 @@ class _CustomOptionListState extends State<CustomOptionList> {
   Widget build(BuildContext context) {
     final options = ListView.builder(
       shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
         itemCount: widget.list.length,
         itemBuilder: (context, index) {
           var label = widget.list[index][widget.itemLabel];

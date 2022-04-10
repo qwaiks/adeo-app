@@ -154,7 +154,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
             shrinkWrap: true,
             itemCount: vm.isLoading ? 3 : vm.images.length,
             scrollDirection: Axis.horizontal,
-            itemBuilder: (context, item) {
+            itemBuilder: (context, index) {
+              var image = '';
+              if (vm.images.isNotEmpty) {
+                image = vm.images[index] ?? '';
+              }
               return Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: vm.isLoading
@@ -171,7 +175,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     : ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          'https://picsum.photos/200/300',
+                          image,
                           width: 130,
                           height: 105,
                           fit: BoxFit.cover,

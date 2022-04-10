@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:adeo_app/config/utils.dart';
 import 'package:adeo_app/constants/api.dart';
 import 'package:adeo_app/constants/app_routes.dart';
@@ -43,7 +41,11 @@ class QuestionProvider extends BaseProvider {
 
   index() async {
     String url = Api.questions;
-    var data = {'level_id': selectedLevel, 'course_id': selectedClass, 'limit': 4};
+    var data = {
+      'level_id': selectedLevel,
+      'course_id': selectedClass,
+      'limit': 20
+    };
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => setUiState(UiState.loading),
     );
@@ -65,7 +67,7 @@ class QuestionProvider extends BaseProvider {
       var ans = question.answers
           .singleWhere((element) => element.id == selectedAnswer);
       //check if stat is already in map list of stats for topic
-      String topic = question.topic?.name ?? 'unknown';
+      String topic = question.topic?.name ?? 'unknown topic';
       bool hasStats = questionStats.containsKey(topic);
       //initialize local stats to update stats of topic
       var stat = hasStats ? questionStats[topic] : Stats();
