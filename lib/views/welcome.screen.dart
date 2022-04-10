@@ -29,7 +29,10 @@ class WelcomeScreen extends StatelessWidget {
                   AppString.skip,
                   style: TextStyle(color: AppColors.background01, fontSize: 18),
                 ),
-                onPressed: () {},
+                onPressed: () => router.navigateTo(AppRoutes.questionRoute, args: {
+                  'selectedLevel': 1,
+                  'selectedClass': 1
+                })
               ),
             ),
           )

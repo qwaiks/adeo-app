@@ -43,7 +43,7 @@ class QuestionProvider extends BaseProvider {
 
   index() async {
     String url = Api.questions;
-    var data = {'level_id': 1, 'course_id': 1, 'limit': 4};
+    var data = {'level_id': selectedLevel, 'course_id': selectedClass, 'limit': 4};
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => setUiState(UiState.loading),
     );

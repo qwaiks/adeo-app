@@ -48,7 +48,10 @@ class _LevelPreferenceScreenState extends State<LevelPreferenceScreen> {
                   AppString.skip,
                   style: TextStyle(color: AppColors.background02, fontSize: 18),
                 ),
-                onPressed: () {},
+                onPressed: () => router.navigateTo(AppRoutes.questionRoute, args: {
+                  'selectedLevel': 1,
+                  'selectedClass': 1
+                })
               ),
             ),
           )

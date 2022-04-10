@@ -51,7 +51,10 @@ class _ClassPreferenceScreenState extends State<ClassPreferenceScreen> {
                   AppString.skip,
                   style: TextStyle(color: AppColors.background02, fontSize: 18),
                 ),
-                onPressed: () {},
+                onPressed: () => router.navigateTo(AppRoutes.questionRoute, args: {
+                  'selectedLevel': widget.selectedLevel,
+                  'selectedClass': 1
+                })
               ),
             ),
           )

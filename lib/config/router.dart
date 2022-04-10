@@ -19,7 +19,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 selectedLevel: settings.arguments,
               ));
     case AppRoutes.questionRoute:
-      return MaterialPageRoute(builder: (context) => QuestionScreen());
+      return MaterialPageRoute(builder: (context) => QuestionScreen(data: settings.arguments));
     case AppRoutes.statsRoutes:
       return MaterialPageRoute(builder: (context) =>const ResultScreen());
     default:

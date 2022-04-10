@@ -11,7 +11,12 @@ import 'package:shimmer/shimmer.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class QuestionScreen extends StatefulWidget {
-  const QuestionScreen({Key key}) : super(key: key);
+  final Map<String, int> data;
+
+  const QuestionScreen({
+    Key key,
+    this.data,
+  }) : super(key: key);
 
   @override
   State<QuestionScreen> createState() => _QuestionScreenState();
@@ -19,13 +24,19 @@ class QuestionScreen extends StatefulWidget {
 
 class _QuestionScreenState extends State<QuestionScreen> {
   QuestionProvider vm;
+  int selectedLevel, selectedClass;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     vm = context.read<QuestionProvider>();
-    vm.initProvider(context: context);
+    selectedClass = widget.data['selectedClass'];
+    selectedLevel = widget.data['selectedLevel'];
+    vm.initProvider(
+        context: context,
+        selectedClass: selectedClass,
+        selectedLevel: selectedLevel);
   }
 
   @override
@@ -186,7 +197,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ),
                 )))
         : CustomOptionList(
-            list: vm.question?.answers?.map((e) => e.toJson())?.toList()?? [],
+            list: vm.question?.answers?.map((e) => e.toJson())?.toList() ?? [],
             itemValue: 'id',
             itemLabel: 'text',
             selectedValue: vm.selectedAnswer,
